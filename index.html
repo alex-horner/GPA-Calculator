@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarsdale High School GPA Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li id="home-nav" onclick="setCurrentPage('Home')">Home</li>
+                <li id="gpa-nav" onclick="setCurrentPage('GPA')">GPA Calculator</li>
+                <li id="sat-act-nav" onclick="setCurrentPage('SAT/ACT')">SAT/ACT Prediction</li>
+                <li id="electives-nav" onclick="setCurrentPage('Electives')">Elective Guidance</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1 id="title"></h1>
+        <hr id="hr" />
+        <div id="home-page">
+            <p id="gpa-calculator-description" style="text-align: center;">
+                This GPA calculator calculates based on a 4.4 scale. Please fill out
+                your grade, course level, and credit for each class, and your weighted
+                and unweighted GPA will be given.
+            </p>
+            <h3 id="additional-information-title" style="text-align: center; font-size: 20px; font-weight: bold;">Additional Information</h3>
+            <div id="additional-information" style="background-color: #892121; padding: 10px; border-radius: 10px; margin: 20px auto; width: 80%; text-align: center;">
+                <p id="additional-information-text">
+                    Note that Scarsdale High School does not include PE grades in students' GPAs,
+                    so please do not include your PE grades. Additionally, Scarsdale does not technically
+                    calculate students' weighted GPAs. This means the weighted GPA you receive
+                    is simply our estimate and is likely to differ from various universities'
+                    methods of weighting Scarsdale students' GPAs. To estimate a weighted GPA, we add 0.5 points for honors classes and 1 point for AT classes, and 0.25 for accelerated classes. This tries to follow common weighting practices, though this may not reflect how colleges interpret your GPA. Our estimated SAT and ACT scores are based solely on GPA using general trends of GPA-to-score correlations, but many other factors—such as test preparation and personal strengths—can influence scores. There are various factors that
+                    affect a student's SAT and ACT score, so please speak to a professional to
+                    get a more accurate target score. This is simply an estimate based on one factor: GPA.
+                    Finally, please fill out the GPA section completely before moving to the target SAT
+                    and ACT section for the most accurate target scores.
+                </p>
+            </div>
+            <h3 id="classes-taken-title" style="text-align: center;">Please insert the number of classes you have taken in your high school career.</h3>
+            <div id="classes-taken-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+                <label id="classes-taken-label" for="classes-taken-select" style="font-size: 18px; margin-right: 10px;">Classes Taken:</label>
+                <select id="classes-taken-select">
+                    <!-- options will be generated dynamically -->
+                </select>
+            </div>
+            <p id="classes-taken-selected" style="text-align: center;"></p>
+        </div>
+        <div id="gpa-page" style="display: none;">
+            <div id="gpa-dropdowns-container" style="margin-top: 50px;">
+                <!-- dropdowns will be generated dynamically -->
+            </div>
+            <div id="gpa-results-container">
+                <p id="unweighted-gpa">Unweighted GPA: 0</p>
+                <p id="weighted-gpa">Weighted GPA: 0</p>
+            </div>
+        </div>
+        <div id="sat-act-page" style="display: none;">
+            <p id="sat-act-description" style="text-align: center; font-size: 24px;">Please complete the GPA calculation in order to receive a predicted SAT and ACT score</p>
+            <div id="sat-act-scores-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <p id="sat-score" style="font-size: 36px;"></p>
+                <p id="act-score" style="font-size: 36px;"></p>
+            </div>
+        </div>
+        <div id="electives-page" style="display: none;">
+            <div id="electives-major-container" style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+                <select id="electives-major-select" style="width: 400px; height: 50px;">
+                    <option value="">Select a Major</option>
+                    <option value="Arts and Music">Arts and Music</option>
+                    <option value="Theater">Theater</option>
+                    <option value="Business">Business</option>
+                    <option value="Computers & Math">Computers & Math</option>
+                    <option value="Engineering & Technology">Engineering & Technology</option>
+                    <option value="Language & Humanities">Language & Humanities</option>
+                    <option value="Natural Sciences">Natural Sciences</option>
+                    <option value="Social Sciences">Social Sciences</option>
+                </select>
+            </div>
+            <div id="electives-results-container" style="display: none;">
+                <div id="electives-list-container" style="background-color: #892121; padding: 10px; border-radius: 10px; margin: 20px auto; width: 80%; text-align: center;">
+                    <ul id="electives-list" style="list-style: none; padding: 0; margin: 0;">
+                        <!-- electives will be generated dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
