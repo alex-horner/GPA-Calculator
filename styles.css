@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-y: auto;
+}
+
+header {
+    background-color: #892121;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav li {
+    margin-right: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+nav li:hover {
+    background-color: #6a0a0a;
+    border-radius: 5px;
+}
+
+.current-page {
+    background-color: #6a0a0a;
+    border-radius: 5px;
+}
+
+main {
+    padding: 20px;
+    background-color: #640101;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#hr {
+    height: 5px;
+    background-color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#home-page, #gpa-page, #sat-act-page, #electives-page {
+    display: none;
+}
+
+#classes-taken-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#classes-taken-label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+#classes-taken-select {
+    height: 50px;
+    width: 150px;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #ccc;
+    border-radius: 5px;
+}
+
+#gpa-dropdowns-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#gpa-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#sat-act-scores-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#electives-major-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#electives-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
