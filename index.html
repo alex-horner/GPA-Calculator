@@ -99,6 +99,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 18px;
         }
 
         #sat-act-scores-container {
@@ -106,6 +107,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 18px;
         }
 
         #electives-major-container {
@@ -120,6 +122,26 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        .step {
+            background-color: #892121;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .step h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -138,26 +160,11 @@
         <h1 id="title"></h1>
         <hr id="hr" />
         <div id="home-page">
-            <p id="gpa-calculator-description" style="text-align: center;">
-                This GPA calculator calculates based on a 4.4 scale. Please fill out
-                your grade, course level, and credit for each class, and your weighted
-                and unweighted GPA will be given.
-            </p>
-            <h3 id="additional-information-title" style="text-align: center; font-size: 20px; font-weight: bold;">Additional Information</h3>
-            <div id="additional-information" style="background-color: #892121; padding: 10px; border-radius: 10px; margin: 20px auto; width: 80%; text-align: center;">
-                <p id="additional-information-text">
-                    Note that Scarsdale High School does not include PE grades in students' GPAs,
-                    so please do not include your PE grades. Additionally, Scarsdale does not technically
-                    calculate students' weighted GPAs. This means the weighted GPA you receive
-                    is simply our estimate and is likely to differ from various universities'
-                    methods of weighting Scarsdale students' GPAs. To estimate a weighted GPA, we add 0.5 points for honors classes and 1 point for AT classes, and 0.25 for accelerated classes. This tries to follow common weighting practices, though this may not reflect how colleges interpret your GPA. Our estimated SAT and ACT scores are based solely on GPA using general trends of GPA-to-score correlations, but many other factors—such as test preparation and personal strengths—can influence scores. There are various factors that
-                    affect a student's SAT and ACT score, so please speak to a professional to
-                    get a more accurate target score. This is simply an estimate based on one factor: GPA.
-                    Finally, please fill out the GPA section completely before moving to the target SAT
-                    and ACT section for the most accurate target scores.
-                </p>
+            <div class="step">
+                <h2>Welcome to the Scarsdale High School GPA Calculator!</h2>
+                <p>This tool is designed to help you calculate your weighted and unweighted GPA and provide you a SAT and ACT score.</p>
+                <p>To get started, please select the number of classes you have taken in your high school career.</p>
             </div>
-            <h3 id="classes-taken-title" style="text-align: center;">Please insert the number of classes you have taken in your high school career.</h3>
             <div id="classes-taken-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
                 <label id="classes-taken-label" for="classes-taken-select" style="font-size: 18px; margin-right: 10px;">Classes Taken:</label>
                 <select id="classes-taken-select">
@@ -167,6 +174,10 @@
             <p id="classes-taken-selected" style="text-align: center;"></p>
         </div>
         <div id="gpa-page" style="display: none;">
+            <div class="step">
+                <h2>Step 1: Enter Your Grades</h2>
+                <p>Please enter your grades for each class excluding PE.</p>
+            </div>
             <div id="gpa-dropdowns-container" style="margin-top: 50px;">
                 <!-- dropdowns will be generated dynamically -->
             </div>
@@ -176,13 +187,20 @@
             </div>
         </div>
         <div id="sat-act-page" style="display: none;">
-            <p id="sat-act-description" style="text-align: center; font-size: 24px;">Please complete the GPA calculation in order to receive a predicted SAT and ACT score</p>
+            <div class="step">
+                <h2>Step 2: Predict Your SAT and ACT Scores</h2>
+                <p>Based on your GPA, we can predict your SAT and ACT scores.</p>
+            </div>
             <div id="sat-act-scores-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <p id="sat-score" style="font-size: 36px;"></p>
-                <p id="act-score" style="font-size: 36px;"></p>
+                <p id="sat-score" style="font-size: 18px;"></p>
+                <p id="act-score" style="font-size: 18px;"></p>
             </div>
         </div>
         <div id="electives-page" style="display: none;">
+            <div class="step">
+                <h2>Step 3: Get Elective Guidance</h2>
+                <p>Please select a major to get elective guidance.</p>
+            </div>
             <div id="electives-major-container" style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
                 <select id="electives-major-select">
                     <option value="">Select a Major</option>
@@ -304,10 +322,14 @@
 
         function levelToMultiplier(level) {
             switch (level.toLowerCase()) {
-                case 'honors': return 0.5;
-                case 'accelerated': return 0.25;
-                case 'at': return 1.0;
-                default: return 0;
+                case 'accelerated':
+                    return 0.25;
+                case 'honors':
+                    return 0.5;
+                case 'at':
+                    return 1.0;
+                default:
+                    return 0;
             }
         }
 
@@ -339,15 +361,8 @@
 
             courses.forEach(course => {
                 const gradePoints = letterToNumeric(course.grade);
-                let weightedGradePoints = gradePoints;
-
-                if (course.level.toLowerCase() === 'honors') {
-                    weightedGradePoints += 0.5;
-                } else if (course.level.toLowerCase() === 'accelerated') {
-                    weightedGradePoints += 0.25;
-                } else if (course.level.toLowerCase() === 'at') {
-                    weightedGradePoints += 1;
-                }
+                const weight = levelToMultiplier(course.level);
+                const weightedGradePoints = gradePoints + weight;
 
                 const credits = parseFloat(course.credits) || 0;
 
@@ -390,9 +405,7 @@
                 predictedACT = predictACTScore(parseFloat(weightedGpa));
                 document.getElementById('sat-score').innerText = `SAT Score: ${predictedSAT}`;
                 document.getElementById('act-score').innerText = `ACT Score: ${predictedACT}`;
-                document.getElementById('sat-act-description').innerText = '';
             } else {
-                document.getElementById('sat-act-description').innerText = 'Please complete the GPA calculation in order to receive a predicted SAT and ACT score';
                 document.getElementById('sat-score').innerText = '';
                 document.getElementById('act-score').innerText = '';
             }
@@ -403,7 +416,18 @@
             electivesList.innerHTML = '';
             electives.forEach(elective => {
                 const li = document.createElement('li');
-                li.innerText = elective;
+                li.style.listStyle = 'none';
+                li.style.padding = '10px';
+                li.style.marginBottom = '10px';
+                const span = document.createElement('span');
+                span.style.fontSize = '18px';
+                span.style.fontWeight = 'bold';
+                span.innerText = '• ';
+                const electiveText = document.createElement('span');
+                electiveText.style.fontSize = '18px';
+                electiveText.innerText = elective;
+                li.appendChild(span);
+                li.appendChild(electiveText);
                 electivesList.appendChild(li);
             });
         }
